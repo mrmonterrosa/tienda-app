@@ -8,4 +8,4 @@ Abrir Linea de comandos y ejecutar `npm install`.
 
 ## Correr la aplicacion
 
-Run `ng serve` para un servidor de desarrollo. Vaya a `http://localhost:4200/`. La aplicación se recargará automáticamente si cambia alguno de los archivos de origen.
+Ejecutar `ng serve` para un servidor de desarrollo. Vaya a `http://localhost:4200/`. La aplicación se recargará automáticamente si cambia alguno de los archivos de origen.
