@@ -1,9 +1,17 @@
 <div class="col-12">
+    <div *ngIf="errorMessage != null" class="row">
+        <div class="col-md-12 mb-2">
+            <div class="alert alert-danger" role="alert">
+                {{ errorMessage }}
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-4 mb-4">
             <div class="card mb-3">
-                <h5 class="card-title">Formulario</h5>
                 <div class="card-body">
+                    <h5 class="card-title">Formulario</h5>
+                    <hr/>
                     <form #f="ngForm" (ngSubmit)="crearModel(f)">
                         <div class="mb-3">
                             <label for="codigo" class="form-label">Codigo*:</label>
@@ -21,8 +29,8 @@
                             <div *ngIf="f.submitted && f.form.controls['precio'].errors" id="precioHelp" class="form-text text-danger">Campo precio requerido.</div>
                         </div>
                         <button type="submit" class="btn btn-primary">{{ producto.id == null ? 'Crear' : 'Modificar' }}</button>
-                        <button class="btn btn-danger" (click)="eliminar()" *ngIf="producto.id != null">Eliminar</button>
-                        <button class="btn btn-secondary mx-1" (click)="clear()">Reset</button>
+                        <button class="btn btn-danger" (click)="eliminar()" type="button" *ngIf="producto.id != null">Eliminar</button>
+                        <button class="btn btn-secondary mx-1" (click)="clear()" type="reset">Reset</button>
                     </form>
                 </div>
             </div>
@@ -47,6 +55,12 @@
                         </tr>
                     </tbody>
                 </table>
+                <div *ngIf="loading" class="text-center text-primary">
+                    Cargando los productos...
+                </div>
+                <div *ngIf="!loading && productos.length == 0" class="alert alert-info" role="alert">
+                    Aun no hay productos, añade uno!
+                </div>
             </div>
         </div>
     </div>
