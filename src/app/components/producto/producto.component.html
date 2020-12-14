@@ -1,1 +1,53 @@
-<p>producto works!</p>
+<div class="col-12">
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card mb-3">
+                <h5 class="card-title">Formulario</h5>
+                <div class="card-body">
+                    <form #f="ngForm" (ngSubmit)="crearModel(f)">
+                        <div class="mb-3">
+                            <label for="codigo" class="form-label">Codigo*:</label>
+                            <input type="text" [(ngModel)]="producto.codigo" minlength="2" maxlength="5" required class="form-control" id="codigo" name="codigo" aria-describedby="codigoHelp">
+                            <div *ngIf="f.submitted && f.form.controls['codigo'].errors" id="codigoHelp" class="form-text text-danger">Campo codigo requerido</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre*:</label>
+                            <input type="text" [(ngModel)]="producto.nombre" required class="form-control" id="nombre" name="nombre" aria-describedby="nombreHelp">
+                            <div *ngIf="f.submitted && f.form.controls['nombre'].errors" id="nombreHelp" class="form-text text-danger">Campo nombre requerido.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="precio" class="form-label">Precio*:</label>
+                            <input type="text" [(ngModel)]="producto.precio" required class="form-control" id="precio" name="precio" aria-describedby="precioHelp">
+                            <div *ngIf="f.submitted && f.form.controls['precio'].errors" id="precioHelp" class="form-text text-danger">Campo precio requerido.</div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">{{ producto.id == null ? 'Crear' : 'Modificar' }}</button>
+                        <button class="btn btn-danger" (click)="eliminar()" *ngIf="producto.id != null">Eliminar</button>
+                        <button class="btn btn-secondary mx-1" (click)="clear()">Reset</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Codigo</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let p of productos; let i = index" (click)="cargaData(p)">
+                            <th scope="row">{{ i + 1 }}</th>
+                            <td>{{ p.codigo }}</td>
+                            <td>{{ p.nombre }}</td>
+                            <td>{{ p.precio | currency:'COP':'symbol-narrow': '.0-0' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
